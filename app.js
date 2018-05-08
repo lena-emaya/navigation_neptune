@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/lenaemaya/cjgwanjnl00532rpo3uvbv6do', //hosted style id
+    style: 'mapbox://styles/lenaemaya/cjgxn4w4y001o2roa01rkjr3t', //hosted style id
     center: [-122.381290, 37.738768], // starting position
     zoom: 15.5,
     pitch: 25,
