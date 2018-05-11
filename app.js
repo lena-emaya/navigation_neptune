@@ -29,6 +29,7 @@ var animationControl = d3.select("#animationControl"),
     maneuverIndicateDistance = d3.select("#maneuverIndicateDistance"),
     maneuverIndicateDistanceMeasure = d3.select("#maneuverIndicateDistanceMeasure"),
     topPanel = d3.select("#topPanel");
+
 var routeStyleSimple = {
   "id": "route",
   "after": "road-shields-black",
@@ -36,10 +37,11 @@ var routeStyleSimple = {
   "filter": ["==", "type", "route"],
   "source": "route",
   "layout": {
-      "line-cap": "round"
+      "line-cap": "round",
+      "line-join": "round"
     },
   "paint": {
-    "line-color": "#B006F7",
+    "line-color": "#D659FF",
     "line-opacity": 1,
     "line-width": {
           "stops": [
@@ -50,7 +52,7 @@ var routeStyleSimple = {
             [12, 3],
             [14, 5],
             [18, 20]
-          ]}
+          ]},
   }
 };
 // var routeStyleTraffic = {
@@ -117,9 +119,9 @@ var pointerStyleBg = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#97E1FB",
+    "circle-color": "#80F1F7",
     "circle-opacity": 0.35,
-    "circle-radius": 20
+    "circle-radius": 22
   }
 };
 
@@ -128,9 +130,9 @@ var pointerStyleBg2 = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#C07DF4",
-    "circle-opacity": 0.65,
-    "circle-radius": 11
+    "circle-color": "#D659FF",
+    "circle-opacity": 0.55,
+    "circle-radius": 14
   }
 };
 
@@ -139,9 +141,9 @@ var pointerStyle = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#B006F7",
+    "circle-color": "#AE36EF",
     "circle-opacity": 1,
-    "circle-radius": 6
+    "circle-radius": 7
   }
 };
 // var maneuverStyle = {
@@ -166,16 +168,19 @@ var maneuverStyle = {
     "source": "route",
     "filter": ["==", "type", "maneuver"],
     "layout": {
+      //'visibility': 'none',
         "text-size": {
             "base": 1,
             "stops": [
-                [11, 6],
-                [15,8],
-                [22,10]
+                [11,0],
+                [12.9, 0],
+                [13, 9],
+                [15,12],
+                [22,15]
             ]
         },
         "icon-offset": [
-            55,-30
+            62,-25
         ],
         "icon-image": "popup5",
         "icon-rotation-alignment": "viewport",
@@ -194,19 +199,21 @@ var maneuverStyle = {
         "symbol-placement": "point",
         "text-justify": "left",
         'text-allow-overlap': true,
-        "text-padding": 12,
-        "text-offset": [4,-2.5],
+        "text-padding": 5,
+        "text-offset": [5,-2.25],
         "text-rotation-alignment": "viewport",
         "icon-allow-overlap": true,
-        //"icon-text-fit": 'both',
-        'icon-text-fit-padding': [12,12,12,12],
-        "icon-size": {
-            "base": 1.25,
-            "stops": [
-                [12, 0.55],
-                [22, 0.9]
-            ]
-        },
+        //"icon-text-fit": 'height',
+        'icon-text-fit-padding': [
+          5,5,5,5
+        ],
+        // "icon-size": {
+        //     "base": 1.25,
+        //     "stops": [
+        //         [12, 0],
+        //         [22, 0.9]
+        //     ]
+        // },
         "text-field": '{name}',
         "text-letter-spacing": 0
     },
@@ -227,10 +234,12 @@ toggleAnimation = () => {
     interval = setInterval(moveNext, state.speed);
     state.animation = true;
     animationControl.attr("class", "stop");
+    map.addLayer(maneuverStyle);
   } else {
     clearInterval(interval);
     state.animation = false;
     animationControl.attr("class", "play");
+    map.removeLayer(maneuverStyle);
   }
 }
 moveNext = () => {
@@ -300,7 +309,7 @@ map.on('load', ()=> {
     state.point = turf.along(routeLine, state.distance, 'kilometers');
     map.addSource("route", { type: "geojson", data: "https://raw.githubusercontent.com/urbica/navigation/master/data/route.geojson" });
     map.addSource("point", { type: "geojson", data: {type: "FeatureCollection", features: [state.point]} });
-    map.addLayer(maneuverStyle);
+    //map.addLayer(maneuverStyle);
     var style = map.getStyle();
     //console.log(style);
 
@@ -319,11 +328,11 @@ map.on('load', ()=> {
     //style.layers.splice(afterId, 0, maneuverStyle);
     map.setStyle(style);
 
-    map.addLayer(routeStyleSimple);
+    map.addLayer(routeStyleSimple,'road-shields-black');
     map.addLayer(pointerStyleBg);
     map.addLayer(pointerStyleBg2);
     map.addLayer(pointerStyle);
-    map.addLayer(maneuverStyle);
+    //map.addLayer(maneuverStyle);
     // map.addLayer(routeStyleTraffic);
     animationControl.attr("class", "play");
     animationControl.on('click', toggleAnimation); //bind
