@@ -118,7 +118,7 @@ var pointerStyleBg = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#4569F7",
+    "circle-color": "#136BFB",
     "circle-opacity": 0.35,
     "circle-radius": {
       "stops": [
@@ -137,7 +137,7 @@ var pointerStyleBg2 = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#4569F7",
+    "circle-color": "#136BFB",
     "circle-opacity": 0.55,
     "circle-radius": {
       "stops": [
@@ -156,7 +156,7 @@ var pointerStyle = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#4569F7",
+    "circle-color": "#136BFB",
     "circle-opacity": 1,
     "circle-radius": {
       "stops": [
