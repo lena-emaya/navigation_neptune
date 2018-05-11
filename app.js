@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/lenaemaya/cjgxn4w4y001o2roa01rkjr3t', //hosted style id
+    style: 'mapbox://styles/lenaemaya/cjh1tz7ad0s282spndyzthoua', //hosted style id
     center: [-122.381290, 37.738768], // starting position
     zoom: 15.5,
     pitch: 25,
@@ -55,73 +55,80 @@ var routeStyleSimple = {
           ]},
   }
 };
-// var routeStyleTraffic = {
-//   "id": "routeTraffic",
-//   "after": "road-label-small",
-//   "type": "line",
-//   "filter": ["==", "type", "traffic"],
-//   "source": "route",
-//   "layout": {
-//     "line-cap": "round"
-//   },
-//   "paint": {
-//     "line-opacity": 1,
-//     "line-color": {
-//       "property": "speed",
-//       "type": "interval",
-//       "stops": [
-//         [10, "#000fff"],
-//         [20, "#000fff"],
-//         [30, "#000fff"],
-//         [40, "#000fff"]
-//       ]
-//     },
-//     "line-width": {
-//       "stops": [
-//         [7, 1.8],
-//         [8, 1.9],
-//         [9, 2.4],
-//         [10, 3],
-//         [12, 5],
-//         [14, 9],
-//         [18, 35]
-//       ]
-//     },
-//   }
-// };
-// var routeStyleTrafficCase = {
-//   "id": "routeTrafficCase",
-//   "after": "road-label-small",
-//   "type": "line",
-//   "filter": ["==", "type", "traffic"],
-//   "source": "route",
-//   "layout": {
-//     "line-cap": "round"
-//   },
-//   "paint": {
-//     "line-color":  "#FFFFFF",
-//     "line-opacity": 0.5,
-//     "line-width": {
-//       "stops": [
-//         [7, 3.8],
-//         [8, 3.9],
-//         [9, 4.4],
-//         [10, 5],
-//         [12, 7],
-//         [14, 11],
-//         [18, 39]
-//       ]
-//     },
-//   }
-// };
+var routeStyleTraffic = {
+  "id": "routeTraffic",
+  "after": "road-label-small",
+  "type": "line",
+  "filter": ["==", "type", "traffic"],
+  "source": "route",
+  "layout": {
+    "line-cap": "round"
+  },
+  "paint": {
+    "line-opacity": 1,
+    "line-color": {
+      "property": "speed",
+      "type": "interval",
+      "stops": [
+        [10, "#00E07B"],
+        [20, "#FAFC19"],
+        [30, "#FF4C59"],
+        [40, "#B51262"]
+      ]
+    },
+    "line-width": {
+      "stops": [
+        [7, 1.8],
+        [8, 1.9],
+        [9, 2.4],
+        [10, 2.5],
+        [12, 3],
+        [14, 5],
+        [18, 20]
+      ]},
+  }
+};
+var routeStyleTrafficCase = {
+  "id": "routeTrafficCase",
+  "after": "road-label-small",
+  "type": "line",
+  "filter": ["==", "type", "traffic"],
+  "source": "route",
+  "layout": {
+    "line-cap": "round"
+  },
+  "paint": {
+    "line-color":  "#FFFFFF",
+    "line-opacity": 0.5,
+    "line-width": {
+      "stops": [
+        [7, 3.8],
+        [8, 3.9],
+        [9, 4.4],
+        [10, 5],
+        [12, 7],
+        [14, 11],
+        [18, 39]
+      ]
+    },
+  }
+};
 var pointerStyleBg = {
   "id": "pointerBg",
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#80F1F7",
+    "circle-color": "#4569F7",
     "circle-opacity": 0.35,
-    "circle-radius": 22
+    "circle-radius": {
+      "stops": [
+        [9,0],
+        [11.99, 0],
+        [12, 14],
+        [16, 23],
+        [18, 32]
+
+      ]}
   }
 };
 
@@ -130,9 +137,17 @@ var pointerStyleBg2 = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#D659FF",
+    "circle-color": "#4569F7",
     "circle-opacity": 0.55,
-    "circle-radius": 14
+    "circle-radius": {
+      "stops": [
+        [9,0],
+        [11.99, 0],
+        [12, 7],
+        [16, 13],
+        [18, 18]
+
+      ]}
   }
 };
 
@@ -141,9 +156,16 @@ var pointerStyle = {
   "type": "circle",
   "source": "point",
   "paint": {
-    "circle-color": "#AE36EF",
+    "circle-color": "#4569F7",
     "circle-opacity": 1,
-    "circle-radius": 7
+    "circle-radius": {
+      "stops": [
+        [9,0],
+        [11.99, 0],
+        [12, 4],
+        [16, 7],
+        [18, 10]
+      ]}
   }
 };
 // var maneuverStyle = {
@@ -323,12 +345,12 @@ map.on('load', ()=> {
     console.log(afterId);
     //style.layers.splice(afterId, 0, pointerStyleBg);
     //style.layers.splice(afterId, 0,routeStyleSimple);
-    //  style.layers.splice(afterId, 0, routeStyleTraffic);
-    //  style.layers.splice(afterId, 0, routeStyleTrafficCase);
+    style.layers.splice(afterId, 0, routeStyleTraffic);
+    style.layers.splice(afterId, 0, routeStyleTrafficCase);
     //style.layers.splice(afterId, 0, maneuverStyle);
     map.setStyle(style);
 
-    map.addLayer(routeStyleSimple,'road-shields-black');
+    //map.addLayer(routeStyleSimple,'road-shields-black');
     map.addLayer(pointerStyleBg);
     map.addLayer(pointerStyleBg2);
     map.addLayer(pointerStyle);
