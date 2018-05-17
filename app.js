@@ -62,7 +62,8 @@ var routeStyleTraffic = {
   "filter": ["==", "type", "traffic"],
   "source": "route",
   "layout": {
-    "line-cap": "round"
+    "line-cap": "round",
+    "line-join": "round"
   },
   "paint": {
     "line-opacity": 1,
@@ -80,10 +81,10 @@ var routeStyleTraffic = {
       "base": 1,
       "stops": [
         [8, 1],
-    [11, 3],
-    [14, 6],
-    [18, 10],
-    [22, 21]
+    [11, 4],
+    [14, 12],
+    [18, 17],
+    [22, 25]
       ]
     }
   }
@@ -97,7 +98,8 @@ var routeStyleTrafficCase = {
   "filter": ["==", "type", "traffic"],
   "source": "route",
   "layout": {
-    "line-cap": "round"
+    "line-cap": "round",
+    "line-join": "round"
   },
   "paint": {
     "line-color":  "#ffffff",
@@ -106,9 +108,9 @@ var routeStyleTrafficCase = {
       "base": 1,
       "stops": [
         [8, 1.5],
-        [11, 5],
-        [14, 9],
-        [18, 15],
+        [11, 8],
+        [14, 16],
+        [18, 23],
         [22, 35]
       ]
     }
@@ -181,9 +183,9 @@ var pointerStyle = {
     "icon-size": {
       "base": 1,
       "stops": [
-        [8, 0.45],
-        [12, 0.65],
-        [22, 1.5]
+        [8, 0.55],
+        [12, 0.85],
+        [22, 1.75]
       ]
     }
   }
@@ -210,6 +212,7 @@ var maneuverStyle = {
     "id": "maneuver",
     "type": "symbol",
     "source": "route",
+    "min-zoom": 12,
     "filter": ["==", "type", "maneuver"],
     "layout": {
       //'visibility': 'none',
