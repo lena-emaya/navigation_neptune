@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/lenaemaya/cjh1tz7ad0s282spndyzthoua', //hosted style id
+    style: 'mapbox://styles/lenaemaya/cjh8x06io0nd72sla13jvtwik', //hosted style id
     center: [-122.381290, 37.738768], // starting position
     zoom: 15.5,
     pitch: 25,
@@ -70,24 +70,26 @@ var routeStyleTraffic = {
       "property": "speed",
       "type": "interval",
       "stops": [
-        [10, "#00E07B"],
-        [20, "#FAFC19"],
-        [30, "#FF4C59"],
-        [40, "#B51262"]
-      ]
+        [10, "#35C478"],
+        [20, "#FDBC04"],
+        [30, "#ED0B0B"],
+        [40, "#990303"]
+      ],
     },
     "line-width": {
+      "base": 1,
       "stops": [
-        [7, 1.8],
-        [8, 1.9],
-        [9, 2.4],
-        [10, 2.5],
-        [12, 3],
+        [8, 1],
+        [11, 2],
         [14, 5],
-        [18, 20]
-      ]},
+        [18, 9],
+        [22, 20]
+      ]
+    }
   }
 };
+
+
 var routeStyleTrafficCase = {
   "id": "routeTrafficCase",
   "after": "road-label-small",
@@ -98,76 +100,96 @@ var routeStyleTrafficCase = {
     "line-cap": "round"
   },
   "paint": {
-    "line-color":  "#FFFFFF",
-    "line-opacity": 0.5,
+    "line-color":  "#ffffff",
+    "line-opacity": 1,
     "line-width": {
+      "base": 1,
       "stops": [
-        [7, 3.8],
-        [8, 3.9],
-        [9, 4.4],
-        [10, 5],
-        [12, 7],
-        [14, 11],
-        [18, 39]
+        [8, 1.5],
+        [11, 5],
+        [14, 9],
+        [18, 15],
+        [22, 35]
       ]
-    },
+    }
   }
 };
-var pointerStyleBg = {
-  "id": "pointerBg",
-  "type": "circle",
-  "source": "point",
-  "paint": {
-    "circle-color": "#136BFB",
-    "circle-opacity": 0.35,
-    "circle-radius": {
-      "stops": [
-        [9,0],
-        [11.99, 0],
-        [12, 14],
-        [16, 23],
-        [18, 32]
+// var pointerStyleBg = {
+//   "id": "pointerBg",
+//   "type": "circle",
+//   "source": "point",
+//   "paint": {
+//     "circle-color": "#53A9F4",
+//     "circle-opacity": 0.35,
+//     "circle-radius": {
+//       "stops": [
+//         [9,0],
+//         [11.99, 0],
+//         [12, 14],
+//         [16, 23],
+//         [18, 32]
 
-      ]}
-  }
-};
+//       ]}
+//   }
+// };
 
-var pointerStyleBg2 = {
-  "id": "pointerBg2",
-  "type": "circle",
-  "source": "point",
-  "paint": {
-    "circle-color": "#136BFB",
-    "circle-opacity": 0.55,
-    "circle-radius": {
-      "stops": [
-        [9,0],
-        [11.99, 0],
-        [12, 7],
-        [16, 13],
-        [18, 18]
+// var pointerStyleBg2 = {
+//   "id": "pointerBg2",
+//   "type": "circle",
+//   "source": "point",
+//   "paint": {
+//     "circle-color": "#53A9F4",
+//     "circle-opacity": 0.55,
+//     "circle-radius": {
+//       "stops": [
+//         [9,0],
+//         [11.99, 0],
+//         [12, 7],
+//         [16, 13],
+//         [18, 18]
 
-      ]}
-  }
-};
+//       ]}
+//   }
+// };
+
+// var pointerStyle = {
+//   "id": "pointer",
+//   "type": "circle",
+//   "source": "point",
+//   "paint": {
+//     "circle-color": "#53A9F4",
+//     "circle-opacity": 1,
+//     "circle-radius": {
+//       "stops": [
+//         [9,0],
+//         [11.99, 0],
+//         [12, 4],
+//         [16, 7],
+//         [18, 10]
+//       ]}
+//   }
+// };
+
 
 var pointerStyle = {
   "id": "pointer",
-  "type": "circle",
+  "type": "symbol",
   "source": "point",
-  "paint": {
-    "circle-color": "#136BFB",
-    "circle-opacity": 1,
-    "circle-radius": {
+  "layout": {
+    "icon-image": "placement",
+  
+    "icon-size": {
+      "base": 1,
       "stops": [
-        [9,0],
-        [11.99, 0],
-        [12, 4],
-        [16, 7],
-        [18, 10]
-      ]}
+        [8, 0.45],
+        [12, 0.65],
+        [22, 1.5]
+      ]
+    }
   }
 };
+
+
 // var maneuverStyle = {
 //   "id": "maneuver",
 //   "type": "circle",
@@ -204,7 +226,19 @@ var maneuverStyle = {
         "icon-offset": [
             62,-25
         ],
-        "icon-image": "popup5",
+        "icon-image": {
+          "base": 1,
+          "type": "categorical",
+          "property": "arrow",
+          "stops": [
+            ["right", "right"],
+            ["left", 'left'],
+            ["straight", "straight"],
+            ["slight-left", "slight-left"],
+            ["slight-right", "slight-right"]
+          ],
+          "default": "straight"
+        },
         "icon-rotation-alignment": "viewport",
         "text-max-angle": 30,
         // "symbol-spacing": {
@@ -221,13 +255,13 @@ var maneuverStyle = {
         "symbol-placement": "point",
         "text-justify": "left",
         'text-allow-overlap': true,
-        "text-padding": 5,
+        //"text-padding": 5,
         "text-offset": [5,-2.25],
         "text-rotation-alignment": "viewport",
         "icon-allow-overlap": true,
-        //"icon-text-fit": 'height',
+        "icon-text-fit": 'both',
         'icon-text-fit-padding': [
-          5,5,5,5
+          30,110,40,90
         ],
         // "icon-size": {
         //     "base": 1.25,
@@ -351,18 +385,18 @@ map.on('load', ()=> {
     map.setStyle(style);
 
     //map.addLayer(routeStyleSimple,'road-shields-black');
-    map.addLayer(pointerStyleBg);
-    map.addLayer(pointerStyleBg2);
+    //map.addLayer(pointerStyleBg);
+    //map.addLayer(pointerStyleBg2);
     map.addLayer(pointerStyle);
     //map.addLayer(maneuverStyle);
     // map.addLayer(routeStyleTraffic);
     animationControl.attr("class", "play");
     animationControl.on('click', toggleAnimation); //bind
 
-    //map.on('click', toggleLabels);
+    map.on('click', toggleLabels);
 
     //starting
-    //toggleLabels();
+    toggleLabels();
 
   trafficLayers.forEach(l => {
       map.setLayoutProperty(l, "visibility", labelsVisibility ? 'visible' : 'none');
@@ -375,8 +409,8 @@ map.on('load', ()=> {
  });
 });
 
-var labelLayers = ['road-label-large', 'road-label-medium', 'road-label-small', 'housenum-label','rail-label-major','rail-label-minor'];
-var trafficLayers = ['traffic-main','traffic-link', 'traffic-primary', 'traffic-small'];
+var labelLayers = ['road-label-large', 'road-label-medium', 'road-label-small'];
+var trafficLayers = ['traffic-main','traffic-link', 'traffic-primary', 'traffic-small', 'traffic-others', 'traffic-main-case', 'traffic-link-case', 'traffic-primary-case', 'traffic-small-case', 'traffic-others-case'];
 
 var labelsVisibility = false;
 
