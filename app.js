@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1IjoibGVuYWVtYXlhIiwiYSI6ImNpa3VhbXE5ZjAwMXB3eG00ajVyc2J6ZTIifQ.kmZ4yVcNrupl4H8EonM3aQ';
 var map = new mapboxgl.Map({
     container: 'map', // container id
-    style: 'mapbox://styles/lenaemaya/cjh8x06io0nd72sla13jvtwik', //hosted style id
+    style: 'mapbox://styles/lenaemaya/cjh1tz7ad0s282spndyzthoua', //hosted style id
     center: [-122.381290, 37.738768], // starting position
     zoom: 15.5,
     pitch: 25,
@@ -70,20 +70,20 @@ var routeStyleTraffic = {
       "property": "speed",
       "type": "interval",
       "stops": [
-        [10, "#35C478"],
-        [20, "#FDBC04"],
-        [30, "#ED0B0B"],
-        [40, "#990303"]
+        [10, "#7352fa"],
+        [20, "#7352fa"],
+        [30, "#7352fa"],
+        [40, "#7352fa"]
       ],
     },
     "line-width": {
       "base": 1,
       "stops": [
         [8, 1],
-        [11, 2],
-        [14, 5],
-        [18, 9],
-        [22, 20]
+    [11, 3],
+    [14, 6],
+    [18, 10],
+    [22, 21]
       ]
     }
   }
@@ -177,7 +177,7 @@ var pointerStyle = {
   "source": "point",
   "layout": {
     "icon-image": "placement",
-  
+    "icon-allow-overlap": true,
     "icon-size": {
       "base": 1,
       "stops": [
@@ -218,14 +218,14 @@ var maneuverStyle = {
             "stops": [
                 [11,0],
                 [12.9, 0],
-                [13, 9],
-                [15,12],
-                [22,15]
+                [13, 12],
+                [15,15],
+                [22,19]
             ]
         },
-        "icon-offset": [
-            62,-25
-        ],
+        // "icon-offset": [
+        //     62,-25
+        // ],
         "icon-image": {
           "base": 1,
           "type": "categorical",
@@ -253,15 +253,15 @@ var maneuverStyle = {
             "Arial Unicode MS Bold"
         ],
         "symbol-placement": "point",
-        "text-justify": "left",
+        "text-justify": "center",
         'text-allow-overlap': true,
         //"text-padding": 5,
-        "text-offset": [5,-2.25],
+        "text-offset": [4,-1.72],
         "text-rotation-alignment": "viewport",
         "icon-allow-overlap": true,
         "icon-text-fit": 'both',
         'icon-text-fit-padding': [
-          30,110,40,90
+          40,130,40,95
         ],
         // "icon-size": {
         //     "base": 1.25,
@@ -393,10 +393,10 @@ map.on('load', ()=> {
     animationControl.attr("class", "play");
     animationControl.on('click', toggleAnimation); //bind
 
-    map.on('click', toggleLabels);
+    //map.on('click', toggleLabels);
 
     //starting
-    toggleLabels();
+    //toggleLabels();
 
   trafficLayers.forEach(l => {
       map.setLayoutProperty(l, "visibility", labelsVisibility ? 'visible' : 'none');
