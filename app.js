@@ -213,7 +213,7 @@ var maneuverStyle = {
     "type": "symbol",
     "source": "maneuver1",
     "min-zoom": 12,
-    "filter": [">=", "position", 1.4],
+    "filter": ["==", "type", "maneuver"],
     "layout": {
       //'visibility': 'none',
         "text-size": {
