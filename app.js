@@ -211,7 +211,7 @@ var pointerStyle = {
 var maneuverStyle = {
     "id": "maneuver",
     "type": "symbol",
-    "source": "maneuver1",
+    "source": "route",
     "min-zoom": 12,
     "filter": ["==", "type", "maneuver"],
     "layout": {
