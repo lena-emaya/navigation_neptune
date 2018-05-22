@@ -71,10 +71,10 @@ var routeStyleTraffic = {
       "property": "speed",
       "type": "interval",
       "stops": [
-        [10, "#7352fa"],
-        [20, "#7352fa"],
-        [30, "#7352fa"],
-        [40, "#7352fa"]
+        [10, "#52a9f4"],
+        [20, "#52a9f4"],
+        [30, "#52a9f4"],
+        [40, "#52a9f4"]
       ],
     },
     "line-width": {
@@ -102,7 +102,7 @@ var routeStyleTrafficCase = {
     "line-join": "round"
   },
   "paint": {
-    "line-color":  "#ffffff",
+    "line-color":  "#0c82ea",
     "line-opacity": 1,
     "line-width": {
       "base": 1,
@@ -178,7 +178,7 @@ var pointerStyle = {
   "type": "symbol",
   "source": "point",
   "layout": {
-    "icon-image": "placement",
+    "icon-image": "location_start",
     "icon-allow-overlap": true,
     "icon-size": {
       "base": 1,
@@ -211,9 +211,9 @@ var pointerStyle = {
 var maneuverStyle = {
     "id": "maneuver",
     "type": "symbol",
-    "source": "route",
+    "source": "./data/route.geojson",
     "min-zoom": 12,
-    "filter": ["==", "type", "maneuver"],
+    "filter": [">=", "position", 1.4],
     "layout": {
       //'visibility': 'none',
         "text-size": {
@@ -221,9 +221,9 @@ var maneuverStyle = {
             "stops": [
                 [11,0],
                 [12.9, 0],
-                [13, 12],
-                [15,15],
-                [22,19]
+                [13, 13],
+                [15,16],
+                [22,20]
             ]
         },
         // "icon-offset": [
@@ -234,11 +234,11 @@ var maneuverStyle = {
           "type": "categorical",
           "property": "arrow",
           "stops": [
-            ["right", "right"],
-            ["left", 'left'],
-            ["straight", "straight"],
-            ["slight-left", "slight-left"],
-            ["slight-right", "slight-right"]
+            ["right", "right_2"],
+            ["left", 'left_2'],
+            ["straight", "straight_2"],
+            ["slight-left", "slight-left_2"],
+            ["slight-right", "slight-right_2"]
           ],
           "default": "straight"
         },
@@ -256,15 +256,15 @@ var maneuverStyle = {
             "Arial Unicode MS Bold"
         ],
         "symbol-placement": "point",
-        "text-justify": "center",
+        "text-justify": "right",
         'text-allow-overlap': true,
         //"text-padding": 5,
-        "text-offset": [4,-1.72],
+        "text-offset": [6.5,-1.2],
         "text-rotation-alignment": "viewport",
         "icon-allow-overlap": true,
         "icon-text-fit": 'both',
         'icon-text-fit-padding': [
-          40,130,40,95
+          40,120,40,150
         ],
         // "icon-size": {
         //     "base": 1.25,
@@ -303,6 +303,7 @@ toggleAnimation = () => {
 }
 moveNext = () => {
   state.distance += state.increment;
+  console.log(state.distance);
   if((state.distance-state.increment) > state.length) {
     state.distance = 0;
     resetManeuverPoints();
@@ -367,6 +368,7 @@ map.on('load', ()=> {
     state.length = turf.lineDistance(routeLine, 'kilometers');
     state.point = turf.along(routeLine, state.distance, 'kilometers');
     map.addSource("route", { type: "geojson", data: "https://raw.githubusercontent.com/urbica/navigation/master/data/route.geojson" });
+    map.addSource("maneuver", { type: "geojson", data: "https://raw.githubusercontent.com/urbica/navigation/master/data/route.geojson" });
     map.addSource("point", { type: "geojson", data: {type: "FeatureCollection", features: [state.point]} });
     //map.addLayer(maneuverStyle);
     var style = map.getStyle();
