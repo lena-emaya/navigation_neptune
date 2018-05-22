@@ -211,7 +211,7 @@ var pointerStyle = {
 var maneuverStyle = {
     "id": "maneuver",
     "type": "symbol",
-    "source": "./data/route.geojson",
+    "source": "maneuver1",
     "min-zoom": 12,
     "filter": [">=", "position", 1.4],
     "layout": {
@@ -368,7 +368,7 @@ map.on('load', ()=> {
     state.length = turf.lineDistance(routeLine, 'kilometers');
     state.point = turf.along(routeLine, state.distance, 'kilometers');
     map.addSource("route", { type: "geojson", data: "https://raw.githubusercontent.com/urbica/navigation/master/data/route.geojson" });
-    map.addSource("maneuver", { type: "geojson", data: "https://raw.githubusercontent.com/urbica/navigation/master/data/route.geojson" });
+    map.addSource("maneuver1", { type: "geojson", data: "https://raw.githubusercontent.com/lena-emaya/navigation_neptune/master/data/route.geojson" });
     map.addSource("point", { type: "geojson", data: {type: "FeatureCollection", features: [state.point]} });
     //map.addLayer(maneuverStyle);
     var style = map.getStyle();
